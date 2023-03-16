@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyWeb_Server", "TangyWeb_Server\TangyWeb_Server.csproj", "{BEA79D25-6AF8-459A-8158-3E4309A07AA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangyWeb_Server", "TangyWeb_Server\TangyWeb_Server.csproj", "{BEA79D25-6AF8-459A-8158-3E4309A07AA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TangyWeb_Client", "TangyWeb_Client\TangyWeb_Client.csproj", "{15AC903E-0C35-4050-89E0-87795DE00FB6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tangy_Models", "tangy_Models\Tangy_Models.csproj", "{7EB0E31F-D6AC-4890-87A1-FD488BC6696A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangy_Business", "Tangy_Business\Tangy_Business.csproj", "{FA237CE1-B0CE-435B-953E-039F426C226C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangy_Common", "Tangy_Common\Tangy_Common.csproj", "{9AEAD140-8391-4249-BF56-726FF6F190C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangy_DataAccess", "Tangy_DataAccess\Tangy_DataAccess.csproj", "{D6E75CC1-1301-4034-A036-6EA11F242392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{BEA79D25-6AF8-459A-8158-3E4309A07AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEA79D25-6AF8-459A-8158-3E4309A07AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEA79D25-6AF8-459A-8158-3E4309A07AA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AC903E-0C35-4050-89E0-87795DE00FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AC903E-0C35-4050-89E0-87795DE00FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AC903E-0C35-4050-89E0-87795DE00FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AC903E-0C35-4050-89E0-87795DE00FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB0E31F-D6AC-4890-87A1-FD488BC6696A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB0E31F-D6AC-4890-87A1-FD488BC6696A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB0E31F-D6AC-4890-87A1-FD488BC6696A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB0E31F-D6AC-4890-87A1-FD488BC6696A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA237CE1-B0CE-435B-953E-039F426C226C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA237CE1-B0CE-435B-953E-039F426C226C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA237CE1-B0CE-435B-953E-039F426C226C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA237CE1-B0CE-435B-953E-039F426C226C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AEAD140-8391-4249-BF56-726FF6F190C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AEAD140-8391-4249-BF56-726FF6F190C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AEAD140-8391-4249-BF56-726FF6F190C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AEAD140-8391-4249-BF56-726FF6F190C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E75CC1-1301-4034-A036-6EA11F242392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E75CC1-1301-4034-A036-6EA11F242392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E75CC1-1301-4034-A036-6EA11F242392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E75CC1-1301-4034-A036-6EA11F242392}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

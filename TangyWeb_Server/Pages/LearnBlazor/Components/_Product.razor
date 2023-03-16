@@ -1,0 +1,41 @@
+﻿<div class="bg-light border p-2 col-5" @onclick="(args)=>ProductSelected(args, Product.Name)">
+    <h4>Product - @Product.Id</h4>
+    <input type="checkbox" @onchange="FavoriteUpdated"/>Add to Favorite
+    <br />
+    <p>Name - @Product.Name</p>
+    <p>@ProductRenderFragment</p>
+    <p>Show Properties - <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"Checked":null)" /></p>
+    @if (Product.IsActive)
+    {
+        <p>Flavor - @Product.ProductProperties.FirstOrDefault(x => x.Key == "Flavor").Value</p>
+        <p>Size - @Product.ProductProperties.FirstOrDefault(x => x.Key == "Size").Value</p>
+        <p>Color - @Product.ProductProperties.FirstOrDefault(x => x.Key == "Color").Value</p>
+    }
+    <br />
+    <_EditDeleteButton IsActive="@Product.IsActive"></_EditDeleteButton>
+</div>
+
+@code {
+    [Parameter]
+    public Demo_Product Product { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnFavoriteUpdated { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnProductSelected { get; set; }
+
+    [Parameter]
+    public RenderFragment ProductRenderFragment { get; set; }
+
+    private async Task FavoriteUpdated(ChangeEventArgs e)
+    {
+        await OnFavoriteUpdated.InvokeAsync((bool)e.Value);
+    }
+
+    private async Task ProductSelected(MouseEventArgs e, string name)
+    {
+        await OnProductSelected.InvokeAsync(name);
+    }
+
+}
