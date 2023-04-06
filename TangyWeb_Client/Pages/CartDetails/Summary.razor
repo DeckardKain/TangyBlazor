@@ -1,8 +1,11 @@
 ﻿@page "/summary"
+@using Microsoft.AspNetCore.Authorization;
 @inject IOrderService _orderService
 @inject IJSRuntime _jsRuntime
 @inject IProductService _productService
 @inject ILocalStorageService _localStorage
+@inject IPaymentService _paymentService
+@attribute [Authorize]
 
 
 @if (IsProcessing)
@@ -48,8 +51,6 @@ else
                         </div>
                     </div>
                 }
-
-
                 <div class="row" style="text-align:right">
                     <div class="col-12 px-3">
                         <h3> Order Total : <span class="text-secondary">@Order.OrderHeader.OrderTotal.ToString("c")</span> </h3>
@@ -69,32 +70,32 @@ else
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">Phone</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.PhoneNumber" type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.PhoneNumber" />
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">Email</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.Email" type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.Email" />
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">Street Address</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.StreetAddress" type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.StreetAddress" />
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">City</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.City" type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.City" />
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">State</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.State"  type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.State" />
                     </div>
                     <div class="form-group pt-2">
                         <label class="text-warning">Postal Code</label>
-                        <input type="text" class="form-control" />
+                        <InputText @bind-Value="Order.OrderHeader.PostalCode" type="text" class="form-control" />
                         <ValidationMessage For="()=>Order.OrderHeader.PostalCode" />
                     </div>
                     <div class="form-group pt-2">
@@ -143,8 +144,17 @@ else
                     ProductName = product.Name,
                     Product = product
                 };
-            Order.OrderDetails.Add(orderDetailDTO);
-            Order.OrderHeader.OrderTotal += (cart.Count + productPrice.Price);
+            Order.OrderDetails.Add(orderDetailDTO);            
+            Order.OrderHeader.OrderTotal += (item.Count * productPrice.Price);
+        }
+
+        if(await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails) != null)
+        {
+            var userInfo = await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails);
+            Order.OrderHeader.UserId = userInfo.Id;
+            Order.OrderHeader.Name = userInfo.Name;
+            Order.OrderHeader.Email = userInfo.Email;
+            Order.OrderHeader.PhoneNumber = userInfo.PhoneNumber;
         }
 
         IsProcessing = false;
@@ -153,7 +163,27 @@ else
 
     private async Task HandleCheckout()
     {
+        try
+        {
+            var paymentDTO = new StripePaymentDTO()
+                {
+                    Order = Order
+                };
 
+            var result = await _paymentService.Checkout(paymentDTO);
+
+            Order.OrderHeader.SessionId = result.Data.ToString();
+
+            var orderDTOSaved = await _orderService.Create(paymentDTO);
+
+            await _localStorage.SetItemAsync(SD.Local_OrderDetails,orderDTOSaved);
+
+            await _jsRuntime.InvokeVoidAsync("redirectToCheckout", result.Data.ToString());
+        }
+        catch (Exception ex)
+        {
+            await _jsRuntime.ToastrError(ex.Message);
+        }
     }
 
 }

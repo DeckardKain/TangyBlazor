@@ -42,7 +42,9 @@ namespace Tangy_Models
         public string State { get; set; }
         [Required]       
         public string PostalCode { get; set; }
-
+        
+        [Required]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
 

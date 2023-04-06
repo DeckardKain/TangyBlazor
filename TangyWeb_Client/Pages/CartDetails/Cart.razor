@@ -117,12 +117,20 @@ else
     {
         OrderTotal = 0;
         ShoppingCart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
-        foreach (var cart in ShoppingCart)
+        if(ShoppingCart == null)
         {
-            cart.Product = Products.FirstOrDefault(x => x.Id == cart.ProductId);
-            cart.ProductPrice = cart.Product.ProductPrices.FirstOrDefault(x => x.Id == cart.ProductPriceId);
-            OrderTotal += (cart.ProductPrice.Price * cart.Count);
+            ShoppingCart = new();
         }
+        else
+        {
+            foreach (var cart in ShoppingCart)
+            {
+                cart.Product = Products.FirstOrDefault(x => x.Id == cart.ProductId);
+                cart.ProductPrice = cart.Product.ProductPrices.FirstOrDefault(x => x.Id == cart.ProductPriceId);
+                OrderTotal += (cart.ProductPrice.Price * cart.Count);
+            }
+        }
+
     }
 
 

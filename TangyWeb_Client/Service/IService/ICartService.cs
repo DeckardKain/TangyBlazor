@@ -7,6 +7,7 @@ namespace TangyWeb_Client.Service.IService
         event Action OnChange;
         Task DecrementCart(ShoppingCart shoppingCart);
         Task IncrementCart(ShoppingCart shoppingCart);
+        Task ClearCart();
 
 
     }

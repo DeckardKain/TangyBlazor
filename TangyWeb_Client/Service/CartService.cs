@@ -14,6 +14,17 @@ namespace TangyWeb_Client.Service
         {
             _localStorage = localStorageService;
         }
+
+        public async Task ClearCart()
+        {
+            var cart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
+            if(cart != null)
+            {
+                await _localStorage.RemoveItemAsync(SD.ShoppingCart);
+            }
+            OnChange.Invoke();
+        }
+
         public async Task DecrementCart(ShoppingCart cartToDecrement)
         {
             // always use constants rather than using magic strings.

@@ -1,8 +1,11 @@
 ﻿@page "/category/create"
 @page "/category/edit/{id:int}"
-
+@using Tangy_Common
+@attribute [Authorize]
 @inject ICategoryRepository _categoryRepository
 @inject NavigationManager _navigationManager
+@attribute [Authorize(Roles = SD.Role_Admin)]
+
 
 <div class="row my-2">
     <h3 class="card-title text-primary mb-3 ml-3">@Title Category</h3>

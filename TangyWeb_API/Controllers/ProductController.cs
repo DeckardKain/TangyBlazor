@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Tangy_Business.Repository.IRepository;
+
 using Tangy_Models;
 
 namespace TangyWeb_API.Controllers
